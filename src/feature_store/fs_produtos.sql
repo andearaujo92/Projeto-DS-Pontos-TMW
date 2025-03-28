@@ -10,8 +10,8 @@ FROM transactions AS trans
 LEFT JOIN transactions_product AS tr_prod
 ON trans.IdTransaction = tr_prod.IdTransaction
 
-WHERE dtTransaction < f'{date}'
-AND dtTransaction >= DATE(f'{date}', '-21 days')),
+WHERE dtTransaction < '{date}'
+AND dtTransaction >= DATE('{date}', '-21 days')),
 
 tb_qtd_share_products AS
 (SELECT
@@ -71,7 +71,7 @@ tb_produto_max AS (
 
 
 SELECT 
-    f'{date}' AS dtRef,
+    '{date}' AS dtRef,
     tqsp.*,
     tpm.NameProduct
 FROM tb_qtd_share_products AS tqsp

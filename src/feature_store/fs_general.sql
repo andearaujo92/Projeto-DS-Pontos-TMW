@@ -3,7 +3,7 @@ WITH tb_rfv AS (
 SELECT
     idCustomer,
     ROUND(
-        MIN(julianday(f'{date}') - julianday(dtTransaction))
+        MIN(julianday('{date}') - julianday(dtTransaction))
         ) + 1 AS recenciaDias,
      COUNT(DISTINCT DATE(dtTransaction)) AS frequenciaDias,
      SUM(CASE 
@@ -11,8 +11,8 @@ SELECT
             END) AS valorPoints
 FROM transactions
 
-WHERE dtTransaction < f'{date}'
-AND dtTransaction >= DATE(f'{date}', '-21 days')
+WHERE dtTransaction < '{date}'
+AND dtTransaction >= DATE('{date}', '-21 days')
 
 GROUP BY idCustomer
 
@@ -22,7 +22,7 @@ tb_idade_base AS (
 SELECT 
     idCustomer,
     ROUND(
-        MAX(julianday(f'{date}') - julianday((dtTransaction)))
+        MAX(julianday('{date}') - julianday((dtTransaction)))
         ) + 1 AS idadeBaseDias
 FROM transactions
 GROUP BY idCustomer 

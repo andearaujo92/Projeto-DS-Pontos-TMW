@@ -9,12 +9,12 @@ WITH tb_pontos_D AS
             END) AS pointsAcumuladosD21,
 
      SUM(CASE 
-            WHEN pointsTransaction > 0 AND dtTransaction >= DATE(f'{date}','-14 days') THEN pointsTransaction
+            WHEN pointsTransaction > 0 AND dtTransaction >= DATE('{date}','-14 days') THEN pointsTransaction
             ELSE 0 
             END) AS pointsAcumuladosD14,
 
      SUM(CASE 
-            WHEN pointsTransaction > 0 AND dtTransaction >= DATE(f'{date}','-7 days') THEN pointsTransaction
+            WHEN pointsTransaction > 0 AND dtTransaction >= DATE('{date}','-7 days') THEN pointsTransaction
             ELSE 0 
             END) AS pointsAcumuladosD7,
 
@@ -24,19 +24,19 @@ WITH tb_pontos_D AS
             END) AS pointsResgatadosD21,
 
      SUM(CASE 
-            WHEN pointsTransaction < 0 AND dtTransaction >= DATE(f'{date}','-14 days') THEN pointsTransaction 
+            WHEN pointsTransaction < 0 AND dtTransaction >= DATE('{date}','-14 days') THEN pointsTransaction 
             ELSE 0
             END) AS pointsResgatadosD14,
 
      SUM(CASE 
-            WHEN pointsTransaction < 0 AND dtTransaction >= DATE(f'{date}','-7 days') THEN pointsTransaction 
+            WHEN pointsTransaction < 0 AND dtTransaction >= DATE('{date}','-7 days') THEN pointsTransaction 
             ELSE 0
             END) AS pointsResgatadosD7
 
 FROM transactions
 
-WHERE dtTransaction < f'{date}'
-AND dtTransaction >= DATE(f'{date}', '-21 days')
+WHERE dtTransaction < '{date}'
+AND dtTransaction >= DATE('{date}', '-21 days')
 
 GROUP BY idCustomer),
 
@@ -47,7 +47,7 @@ SELECT
     SUM(trans.pointsTransaction) AS saldoPoints,
     SUM(CASE WHEN trans.pointsTransaction > 0 THEN trans.pointsTransaction ELSE 0 END) AS pointsAcumuladosVida,
     SUM(CASE WHEN trans.pointsTransaction < 0 THEN trans.pointsTransaction ELSE 0 END) AS pointsResgatadosVida,
-    ROUND(MAX(julianday(f'{date}') - julianday(dtTransaction)))+1 AS diasVida 
+    ROUND(MAX(julianday('{date}') - julianday(dtTransaction)))+1 AS diasVida 
 
 FROM tb_pontos_D AS tpd
 
@@ -55,7 +55,7 @@ LEFT JOIN transactions AS trans
 
 ON tpd.idCustomer = trans.idCustomer
 
-WHERE trans.dtTransaction < f'{date}'
+WHERE trans.dtTransaction < '{date}'
 
 GROUP BY tpd.idCustomer)
 

@@ -29,10 +29,8 @@ GROUP BY idCustomer
 )
 
 SELECT 
-    tb_rfv.idCustomer,
-    frequenciaDias,
-    recenciaDias,
-    valorPoints,
+    '{date}' AS dtref,
+    tb_rfv.*,
     idadeBaseDias,
     flEmail
 FROM tb_rfv

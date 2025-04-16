@@ -60,6 +60,7 @@ WHERE trans.dtTransaction < '{date}'
 GROUP BY tpd.idCustomer)
 
 SELECT 
+        '{date}' AS dtRef,
         tpd.*,
         tbv.pointsAcumuladosVida,
         tbv.pointsResgatadosVida,

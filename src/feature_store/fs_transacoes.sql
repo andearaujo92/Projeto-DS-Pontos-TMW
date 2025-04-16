@@ -62,6 +62,7 @@ FROM tb_transactions
 GROUP BY IdCustomer)
 
 SELECT
+    '{date}' AS dtRef,
     t1.*,
     t2.frequenciaDiasD21,
     t2.frequenciaDiasD14,

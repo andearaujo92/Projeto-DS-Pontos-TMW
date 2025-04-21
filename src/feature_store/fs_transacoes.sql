@@ -64,27 +64,17 @@ GROUP BY IdCustomer)
 SELECT
     '{date}' AS dtRef,
     t1.*,
-    t2.frequenciaDiasD21,
-    t2.frequenciaDiasD14,
-    t2.frequenciaDiasD7,
-    t3.tempoEmLive,
-    t4.avgTempoLive,
-    t4.totalTempoLive,
-    t4.minTempoLive,
-    t4.maxTempoLive,
-    t5.qtdTransactionsVida,
-    t5.avgTransPorDia
+    t2.avgTempoLive,
+    t2.totalTempoLive,
+    t2.minTempoLive,
+    t2.maxTempoLive,
+    t3.qtdTransactionsVida,
+    t3.avgTransPorDia
 
-FROM tb_transactions t1
+FROM tb_freq t1
 
-JOIN tb_freq t2
+LEFT JOIN tb_summary_tempo_live t2
 ON t1.IdCustomer = t2.IdCustomer
 
-JOIN tb_tempo_live t3
-ON t2.IdCustomer = t3.IdCustomer
-
-JOIN tb_summary_tempo_live t4
-ON t3.IdCustomer = t4.IdCustomer
-
-JOIN tb_vida t5
-ON t4.idCustomer = t5.IdCustomer
+LEFT JOIN tb_vida t3
+ON t1.idCustomer = t3.IdCustomer

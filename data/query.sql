@@ -1,1 +1,2 @@
-SELECT * FROM customers
+SELECT *
+FROM tb_churn
